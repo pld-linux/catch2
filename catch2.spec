@@ -6,6 +6,7 @@ License:	Boost v1.0
 Group:		Libraries
 Source0:	https://github.com/catchorg/Catch2/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	8e56bcccbc86e68e916cce0d43450116
+Patch0:		optional-reproducibility.patch
 URL:		https://github.com/catchorg/Catch2
 BuildRequires:	cmake >= 3.10
 BuildRequires:	libstdc++-devel
@@ -27,13 +28,15 @@ Header files for catch2 library.
 
 %prep
 %setup -q -n Catch2-%{version}
+%patch0 -p1
 
 %build
 install -d build
 cd build
 %cmake .. \
 	-DPKGCONFIG_INSTALL_DIR:PATH="%{_pkgconfigdir}" \
-	-DCATCH_INSTALL_DOCS:BOOL=OFF
+	-DCATCH_INSTALL_DOCS:BOOL=OFF \
+	-DCATCH_ENABLE_REPRODUCIBLE_BUILD:BOOL=OFF
 
 %{__make}
 
