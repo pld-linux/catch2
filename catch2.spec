@@ -1,16 +1,17 @@
 Summary:	A modern, C++-native, test framework for unit-tests, TDD and BDD
 Summary(pl.UTF-8):	Nowoczesny, natywny dla C++ szkielet dla testów jednostkowych, TDD i BDD
 Name:		catch2
-Version:	3.5.0
+Version:	3.8.1
 Release:	1
 License:	Boost v1.0
 Group:		Libraries
+#Source0Download: https://github.com/catchorg/Catch2/releases
 Source0:	https://github.com/catchorg/Catch2/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	8e56bcccbc86e68e916cce0d43450116
-Patch0:		optional-reproducibility.patch
+# Source0-md5:	26689984e0a30ff78b94488c1f849f1f
 URL:		https://github.com/catchorg/Catch2
-BuildRequires:	cmake >= 3.10
-BuildRequires:	libstdc++-devel
+BuildRequires:	cmake >= 3.16
+# C++14
+BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -28,7 +29,7 @@ Summary:	Header files for catch2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki catch2
 Group:		Development/Libraries
 Requires:	%{name}%{?_isa} = %{version}-%{release}
-Requires:	libstdc++-devel
+Requires:	libstdc++-devel >= 6:5
 
 %description devel
 Header files for catch2 library.
@@ -38,17 +39,14 @@ Pliki nagłówkowe biblioteki catch2.
 
 %prep
 %setup -q -n Catch2-%{version}
-%patch -P0 -p1
 
 %build
-install -d build
-cd build
-%cmake .. \
+%cmake -B build \
 	-DPKGCONFIG_INSTALL_DIR:PATH="%{_pkgconfigdir}" \
 	-DCATCH_INSTALL_DOCS:BOOL=OFF \
 	-DCATCH_ENABLE_REPRODUCIBLE_BUILD:BOOL=OFF
 
-%{__make}
+%{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
