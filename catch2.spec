@@ -28,7 +28,7 @@ Header files for catch2 library.
 
 %prep
 %setup -q -n Catch2-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 install -d build
