@@ -1,4 +1,5 @@
 Summary:	A modern, C++-native, test framework for unit-tests, TDD and BDD
+Summary(pl.UTF-8):	Nowoczesny, natywny dla C++ szkielet dla testów jednostkowych, TDD i BDD
 Name:		catch2
 Version:	3.5.0
 Release:	1
@@ -17,14 +18,23 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Catch2 is mainly a unit testing framework for C++, but it also
 provides basic micro-benchmarking features, and simple BDD macros.
 
+%description -l pl.UTF-8
+Catch2 to przeznaczony dla C++ szkielet testów przede wszystkim
+jednostkowych, ale zapewniający też funkcjonalność mikro-benchmarków i
+proste makra BDD.
+
 %package devel
 Summary:	Header files for catch2 library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki catch2
 Group:		Development/Libraries
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	libstdc++-devel
 
 %description devel
 Header files for catch2 library.
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki catch2.
 
 %prep
 %setup -q -n Catch2-%{version}
