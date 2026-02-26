@@ -1,13 +1,13 @@
 Summary:	A modern, C++-native, test framework for unit-tests, TDD and BDD
 Summary(pl.UTF-8):	Nowoczesny, natywny dla C++ szkielet dla testów jednostkowych, TDD i BDD
 Name:		catch2
-Version:	3.8.1
+Version:	3.13.0
 Release:	1
 License:	Boost v1.0
 Group:		Libraries
 #Source0Download: https://github.com/catchorg/Catch2/releases
 Source0:	https://github.com/catchorg/Catch2/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	26689984e0a30ff78b94488c1f849f1f
+# Source0-md5:	7e64ff8a07b324996a26f3f5d7e7dad8
 URL:		https://github.com/catchorg/Catch2
 BuildRequires:	cmake >= 3.16
 # C++14
@@ -42,7 +42,7 @@ Pliki nagłówkowe biblioteki catch2.
 
 %build
 %cmake -B build \
-	-DPKGCONFIG_INSTALL_DIR:PATH="%{_pkgconfigdir}" \
+	-DPKGCONFIG_INSTALL_DIR:PATH="%{_lib}/pkgconfig" \
 	-DCATCH_INSTALL_DOCS:BOOL=OFF \
 	-DCATCH_ENABLE_REPRODUCIBLE_BUILD:BOOL=OFF
 
@@ -62,9 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.txt README.md
-%attr(755,root,root) %{_libdir}/libCatch2.so.%{version}
-%attr(755,root,root) %{_libdir}/libCatch2Main.so.%{version}
+%doc LICENSE.txt README.md extras/{gdbinit,lldbinit}
+%{_libdir}/libCatch2.so.%{version}
+%{_libdir}/libCatch2Main.so.%{version}
 
 %files devel
 %defattr(644,root,root,755)
