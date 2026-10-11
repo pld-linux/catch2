@@ -1,13 +1,13 @@
 Summary:	A modern, C++-native, test framework for unit-tests, TDD and BDD
 Summary(pl.UTF-8):	Nowoczesny, natywny dla C++ szkielet dla testów jednostkowych, TDD i BDD
 Name:		catch2
-Version:	3.13.0
+Version:	3.16.1
 Release:	1
 License:	Boost v1.0
 Group:		Libraries
 #Source0Download: https://github.com/catchorg/Catch2/releases
 Source0:	https://github.com/catchorg/Catch2/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	7e64ff8a07b324996a26f3f5d7e7dad8
+# Source0-md5:	aadd412b6277071a804cdde7a7dea244
 URL:		https://github.com/catchorg/Catch2
 BuildRequires:	cmake >= 3.16
 # C++14
@@ -41,7 +41,10 @@ Pliki nagłówkowe biblioteki catch2.
 %setup -q -n Catch2-%{version}
 
 %build
+# .pc files generation expects relative CMAKE_INSTALL_{INCLUDE,LIB}DIR
 %cmake -B build \
+	-DCMAKE_INSTALL_INCLUDEDIR=include \
+	-DCMAKE_INSTALL_LIBDIR=%{_lib} \
 	-DPKGCONFIG_INSTALL_DIR:PATH="%{_lib}/pkgconfig" \
 	-DCATCH_INSTALL_DOCS:BOOL=OFF \
 	-DCATCH_ENABLE_REPRODUCIBLE_BUILD:BOOL=OFF
